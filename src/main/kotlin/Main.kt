@@ -7,7 +7,7 @@ import java.io.IO.println
 fun main() {
     print("Enter path to program (.d5700 file): ")
 //    val filePath = readlnOrNull()?.trim()
-    val filePath = "src/main/roms/subtraction.d5700"
+    val filePath = "src/main/roms/timer.d5700"
 
     if (filePath.isNullOrEmpty()) {
         println("No file path provided. Exiting.")

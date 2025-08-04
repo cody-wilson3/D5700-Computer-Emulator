@@ -20,6 +20,7 @@ class SkipEqualInstruction(private val raw: Int) : Instruction(raw) {
         if (xVal == yVal) {
             CPU.incrementCounter()
             CPU.incrementCounter() // Skip next instruction
+            CPU.incrementCounter()
         } else {
             CPU.incrementCounter() // Continue as normal
         }

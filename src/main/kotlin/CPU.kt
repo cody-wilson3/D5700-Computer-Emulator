@@ -2,6 +2,8 @@ package org.example
 
 import org.example.Instructions.Instruction
 import java.io.File
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 object CPU {
     private val registers = ByteArray(8)
@@ -16,14 +18,29 @@ object CPU {
     fun loadRom(filePath: String) {
         val file = File(filePath)
         file.forEachLine { line ->
-            val hexNumbers = line.trim().chunked(2)
+            val hexNumbers = line.trim().substring(0,4).chunked(2)
             rom.addAll(hexNumbers)
         }
     }
 
     fun runRom() {
-        while ((P) < rom.size) {
-            cycle()
+        val executor = Executors.newSingleThreadScheduledExecutor()
+
+        val runnable = Runnable {
+            CPU.cycle()
+        }
+
+        val cpuFuture = executor.scheduleAtFixedRate(
+            runnable,
+            0,
+            1000L / 500L,
+            TimeUnit.MILLISECONDS)
+
+        // to wait for all futures to finish
+        try {
+            cpuFuture.get() // waits for future to finish or be cancelled - blocks current thread execution (repeating futures will still run)
+        } catch (_: Exception) {
+            executor.shutdown() // turns off the executor allowing the program to terminate when the end is reached
         }
     }
 
@@ -40,6 +57,8 @@ object CPU {
         val instruction = Instruction.whichInstruction((hexByteOne + hexByteTwo).toInt(16))
         incrementCounter()
         instruction.execute(this, memory)
+
+        if (CPU.T > 0) {CPU.T--}
     }
 
     fun getRegisterVal(register: Int): Byte {
