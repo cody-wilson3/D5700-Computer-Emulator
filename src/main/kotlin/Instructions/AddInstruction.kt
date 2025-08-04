@@ -6,7 +6,7 @@ class AddInstruction(private val raw: Int) : Instruction(raw) {
     private var registerIndex = 0
     private var value = 0
 
-    override fun decode() {
+    public override fun decode() {
         registerIndex = raw and 0xF
     }
 

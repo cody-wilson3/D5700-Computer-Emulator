@@ -7,15 +7,11 @@ abstract class Instruction(private val raw: Int) {
     fun run(cpu: CPU, memory: ByteArray) {
         decode()
         execute(cpu, memory)
-        postExecute(cpu)
     }
 
     protected abstract fun decode()
     abstract fun execute(cpu: CPU, memory: ByteArray)
-    protected open fun postExecute(cpu: CPU) {
-        CPU.incrementCounter()
-        CPU.incrementCounter()
-    }
+
 
 
     companion object {

@@ -46,7 +46,6 @@ object CPU {
 
 
     private fun cycle() {
-//        if ((P * 2 + ) >= rom.size) return
 
         val hexByteOne = rom[P]
         val hexByteTwo = rom[P + 1]
@@ -77,24 +76,7 @@ object CPU {
         P = value
     }
 
-
-//    private fun processLine(hex: String) {
-//        val decimal = hex.toInt(16)
-//        val binary = decimal.toString(2).padStart(16, '0')  // For consistent 16-bit output
-//
-//        val firstNibble = (decimal shr 12) and 0xF
-//        val secondNibble = (decimal shr 8) and 0xF
-//        val thirdNibble = (decimal shr 4) and 0xF
-//        val fourthNibble = decimal and 0xF
-//
-//        IO.println("Hex: $hex -> Binary: $binary")
-//
-//        IO.println("First nibble:  $firstNibble  -> Binary: ${firstNibble.toString(2).padStart(4, '0')}")
-//        IO.println("Second nibble: $secondNibble -> Binary: ${secondNibble.toString(2).padStart(4, '0')}")
-//        IO.println("Third nibble:  $thirdNibble  -> Binary: ${thirdNibble.toString(2).padStart(4, '0')}")
-//        IO.println("Fourth nibble: $fourthNibble -> Binary: ${fourthNibble.toString(2).padStart(4, '0')}")
-//    }
-
-
-
+    fun getP(): Int {
+        return P
+    }
 }

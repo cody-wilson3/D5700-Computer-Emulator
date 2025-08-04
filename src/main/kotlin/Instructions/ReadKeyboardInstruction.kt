@@ -2,7 +2,7 @@ package org.example.Instructions
 
 import org.example.CPU
 
-class ReadKeyboardInstruction(private val raw: Int) : Instruction(raw) {
+class ReadKeyboardInstruction(private val raw: Int, private val inputProvider: () -> String? = { readLine() }) : Instruction(raw) {
     private var rX = 0
 
     override fun decode() {
